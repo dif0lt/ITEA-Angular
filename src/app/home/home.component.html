@@ -1,4 +1,4 @@
-<nav>
+<!-- <nav>
   <li *ngFor="let item of navItems">
   <span [class.boldText]="item === 'Home'"
         [class.redText]="item !== 'Home'"
@@ -6,11 +6,22 @@
         (click)="onClick($event)">{{item}}</span>
   </li>
 </nav>
-<input type="text" [(ngModel)]="inpV">
+<input type="text" [(ngModel)]="inpV"> -->
 
-<nav>
+<!-- <nav>
   <li *ngFor="let item of navItems">
   <span [bold]>{{item}}</span>
   </li>
 </nav>
-<input type="text" [(ngModel)]="inpV">
+<input type="text" [(ngModel)]="inpV"> -->
+
+<!-- <div *ngFor="let user of users">
+  <p *while="user.id < 3">
+    {{user.name}}
+  </p>
+</div> -->
+<div *ngFor="let user of users">
+  {{user.firstName}} | {{user.lastName}}
+</div>
+<div>Факториал {{x}} равен {{x | factorial}}</div>
+<div>Array {{foo}} join 2-4 elems {{foo | join:2:4}}</div>
