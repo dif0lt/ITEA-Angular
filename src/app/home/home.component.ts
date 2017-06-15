@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 import { UserService } from '../services/user.service'
 import { User } from '../models/user'
@@ -8,7 +9,7 @@ import { User } from '../models/user'
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
   navItems: Array<string> = ['Home', 'Shop', 'Some'];
   users: User[];
   x: number = 5;
@@ -18,14 +19,12 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private userService: UserService
-  ) { }
-
-  onClick(e: Event) {
-    this.size = '48px';
-  }
-
-  ngOnInit() {
+  ) {
     this.users = this.userService.getUsers();
   }
 
+  onSubmit(e: Event, form: NgForm) {
+    e.preventDefault();
+    this.userService.addUser(form.controls["firstName"].value, form.controls["lastName"].value, form.controls["email"].value, form.controls["age"].value);
+  }
 }

@@ -1,4 +1,8 @@
-<h1>
-  {{title}}
-</h1>
-<app-home></app-home>
+<nav>
+  <li *ngFor="let item of navItems">
+    <a [routerLink]="item.link"
+       routerLinkActive="active-link">{{item.name}}</a>
+  </li>
+</nav>
+
+<router-outlet></router-outlet>
