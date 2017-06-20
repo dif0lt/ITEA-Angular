@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
   clearControlValidation(name: string) {
     console.log(name);
     console.log(this.userForm);
-    this.userForm.controls[name].markAsUntouched();
+    this.userForm.controls[name].markAsTouched();
   }
 
   onSelect(usr: User) {
