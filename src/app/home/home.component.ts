@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { UserService } from '../services/user.service'
 import { User } from '../models/user'
@@ -9,22 +9,60 @@ import { User } from '../models/user'
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
-  navItems: Array<string> = ['Home', 'Shop', 'Some'];
+export class HomeComponent implements OnInit {
+  isFormSubmitted: boolean = false;
   users: User[];
-  x: number = 5;
-  foo: Array<any> = ['John', 'James', 'Jack', 'Mike', 'Piter']
-  inpV: any;
-  size: string = `${this.inpV}px`;
+  selectedUser: User;
+  userForm: FormGroup;
+  
+  REG_EXP: any = /[a-zA-Z_]+@[a-zA-Z_]+?\.[a-zA-Z]{2,4}/;
 
   constructor(
+    private formBuilder: FormBuilder,
     private userService: UserService
   ) {
     this.users = this.userService.getUsers();
   }
 
-  onSubmit(e: Event, form: NgForm) {
-    e.preventDefault();
-    this.userService.addUser(form.controls["firstName"].value, form.controls["lastName"].value, form.controls["email"].value, form.controls["age"].value);
+  clearControlValidation(name: string) {
+    console.log(name);
+    console.log(this.userForm);
+    this.userForm.controls[name].markAsUntouched();
   }
+
+  onSelect(usr: User) {
+    this.selectedUser = usr;
+    this.userForm.controls["id"].setValue(this.selectedUser.id);
+    this.userForm.controls["firstName"].setValue(this.selectedUser.firstName);
+    this.userForm.controls["lastName"].setValue(this.selectedUser.lastName);
+    this.userForm.controls["email"].setValue(this.selectedUser.email);
+    this.userForm.controls["age"].setValue(this.selectedUser.age);
+  }
+
+  onSubmit(e: Event, form: FormGroup) {
+    this.isFormSubmitted = true;
+    e.preventDefault();
+    this.userForm.controls["firstName"].markAsUntouched();
+    this.userForm.controls["lastName"].markAsUntouched();
+    this.userForm.controls["email"].markAsUntouched();
+    this.userForm.controls["age"].markAsUntouched();
+
+    if (this.userForm.valid) {
+      let user: User = form.value;
+      this.userService.addUser(user);
+      this.userForm.reset();
+      this.isFormSubmitted = false;
+    }
+  }
+
+  ngOnInit(): void {
+    this.userForm = this.formBuilder.group({
+      id: [this.selectedUser ? this.selectedUser.id : null],
+      firstName: [this.selectedUser ? this.selectedUser.firstName : null, Validators.required],
+      lastName: [this.selectedUser ? this.selectedUser.lastName : null, Validators.required],
+      email: [this.selectedUser ? this.selectedUser.email : null, [Validators.required, Validators.pattern(this.REG_EXP)]],
+      age: [this.selectedUser ? this.selectedUser.age : null]
+    })
+  }
+
 }
