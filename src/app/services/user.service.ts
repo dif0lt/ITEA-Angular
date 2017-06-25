@@ -1,34 +1,43 @@
 import { Injectable } from '@angular/core';
+import { Http, Response } from '@angular/http';
 import { User } from '../models/user';
+
+import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class UserService {
-  private users: User[] = [
-    { id: 1, firstName: "John", lastName: "Johnson", email: "jjohnson@mail.com", age: "36" },
-    { id: 2, firstName: "Jack", lastName: "Jackson", email: "jjackson@mail.com", age: "25" },
-    { id: 3, firstName: "Lois", lastName: "Lane", email: "llane@mail.com", age: "27" },
-    { id: 4, firstName: "Kate", lastName: "King", email: "kking@mail.com", age: "31" }
-  ]
 
-  getUsers(): User[] {
-    return this.users;
+  constructor(
+    private http: Http,
+   ) {}
+
+  getUsers(): Promise<User[]> {
+    const URL = './assets/users.json';
+    return this.http.get(URL)
+               .toPromise()
+               .then(
+                 response => response.json() as User[]
+               )
+               .catch(
+                 err => this.errorHandler(err)
+               );
   }
 
-  addUser(user: User) {
-    let usr = user;
-    if (usr.id === undefined || usr.id === null) {
-      usr.id += this.users.length
-      this.users.push(usr);
-    } else {
-      this.editUser(usr);
-    }
-    
+  addUser(data: User): Promise<User> {
+    const URL = 'api/addUser';
+    return this.http.post(URL, data, this.headers)
+               .toPromise()
+               .then(
+                 response => response.json() as User
+               )
+               .catch(
+                 err => this.errorHandler(err)
+               )
   }
 
-  editUser(user: User) {
-    let i = this.users.findIndex(item => item.id === user.id);
-    if (i !== -1) {
-      this.users[i] = user;
-    }
+  private errorHandler(err: Error) {
+    console.log(err);
   }
+
+  private headers: Headers = new Headers({ 'Content-Type': 'application/json'});
 }

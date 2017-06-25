@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { RoutingModule } from './modules/routing.module';
+import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { CatalogComponent } from './catalog/catalog.component';
@@ -17,6 +18,7 @@ import { FactorialPipe } from './pipes/factorial.pipe';
 import { JoinPipe } from './pipes/join.pipe';
 
 import { UserService } from './services/user.service';
+import { RegistrationComponent } from './registration/registration.component';
 
 @NgModule({
   declarations: [
@@ -28,16 +30,18 @@ import { UserService } from './services/user.service';
     BoldDirective,
     WhileDirective,
     FactorialPipe,
-    JoinPipe
+    JoinPipe,
+    RegistrationComponent
 
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    RoutingModule
+    RoutingModule,
+    HttpModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { };

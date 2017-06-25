@@ -16,6 +16,7 @@ export class AppComponent {
   navItems: NavItem[] = [
     { name: 'Home', link: 'Home' },
     { name: 'Catalog', link: 'Catalog' },
-    { name: 'Contact Us', link: 'Contact-Us' }
+    { name: 'Contact Us', link: 'Contact-Us' },
+    { name: 'Registration', link: 'Registration' }
   ]
 }

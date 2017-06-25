@@ -1,0 +1,51 @@
+<p>
+  registration works!
+</p>
+<div>
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit($event, userForm)" novalidate>
+    <div class="form__row">
+      <label for="username">Username:</label>
+      <div class="form__input">
+        <input id="username"
+          (change)="clearControlValidation('username')"
+          (focus)="clearControlValidation('username')"
+        formControlName="username" type="text">
+        <div class="message message__error" *ngIf="isFormSubmitted && userForm.controls['username'].invalid && userForm.controls['username'].untouched">
+          Username is required
+        </div>
+      </div>
+    </div>
+    <div class="form__row">
+      <label for="email">Email:</label>
+      <div class="form__input">
+        <input id="email"
+          (change)="clearControlValidation('email')"
+          (focus)="clearControlValidation('email')"
+        formControlName="email" type="email">
+        <div class="message message__error" *ngIf="isFormSubmitted && userForm.controls['email'].invalid && userForm.controls['email'].untouched">
+        <span *ngIf="userForm.controls['email'].hasError('required')">
+          Email is required
+        </span>
+        <span *ngIf="userForm.controls['email'].hasError('pattern')">
+          Email is not Valid
+        </span>
+        </div>
+      </div>
+    </div>
+    <div class="form__row">
+      <label for="password">Password:</label>
+      <div class="form__input">
+        <input id="password"
+          (change)="clearControlValidation('password')"
+          (focus)="clearControlValidation('password')"
+        formControlName="password" type="text">
+        <div class="message message__error" *ngIf="isFormSubmitted && userForm.controls['password'].invalid && userForm.controls['password'].untouched">
+          Password is required
+        </div>
+      </div>
+    </div>
+    <div class="form__row">
+      <input type="submit" value="submit">
+    </div>
+  </form>
+</div>

@@ -1,4 +1,3 @@
-
 <ul>
   <li *ngFor="let user of users" (click)="onSelect(user)">
     {{user.firstName}} | {{user.lastName}}
@@ -9,7 +8,10 @@
     <div class="form__row">
       <label for="firstName">First Name:</label>
       <div class="form__input">
-        <input id="firstName" (change)="clearControlValidation('firstName')" (focus)="clearControlValidation('firstName')" formControlName="firstName" type="text">
+        <input id="firstName"
+          (change)="clearControlValidation('firstName')"
+          (focus)="clearControlValidation('firstName')"
+        formControlName="firstName" type="text">
         <div class="message message__error" *ngIf="isFormSubmitted && userForm.controls['firstName'].invalid && userForm.controls['firstName'].untouched">
           First Name is required
         </div>
@@ -18,16 +20,22 @@
     <div class="form__row">
       <label for="lastName">Last Name:</label>
       <div class="form__input">
-        <input id="lastName" (change)="clearControlValidation('lastName')" (focus)="clearControlValidation('lastName')" formControlName="lastName" type="text">
+        <input id="lastName"
+          (change)="clearControlValidation('lastName')"
+          (focus)="clearControlValidation('lastName')"
+        formControlName="lastName" type="text">
         <div class="message message__error" *ngIf="isFormSubmitted && userForm.controls['lastName'].invalid && userForm.controls['lastName'].untouched">
           Last Name is required
         </div>
       </div>
     </div>
     <div class="form__row">
-      <label for="email">Email</label>
+      <label for="email">Email:</label>
       <div class="form__input">
-        <input id="email" (change)="clearControlValidation('email')" (focus)="clearControlValidation('email')" formControlName="email" type="email">
+        <input id="email"
+          (change)="clearControlValidation('email')"
+          (focus)="clearControlValidation('email')"
+        formControlName="email" type="email">
         <div class="message message__error" *ngIf="isFormSubmitted && userForm.controls['email'].invalid && userForm.controls['email'].untouched">
         <span *ngIf="userForm.controls['email'].hasError('required')">
           Email is required

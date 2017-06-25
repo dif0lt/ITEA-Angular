@@ -13,43 +13,38 @@ export class HomeComponent implements OnInit {
   isFormSubmitted: boolean = false;
   users: User[];
   selectedUser: User;
-  userForm: FormGroup;
-  
+  userForm: FormGroup; 
   REG_EXP: any = /[a-zA-Z_]+@[a-zA-Z_]+?\.[a-zA-Z]{2,4}/;
 
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService
-  ) {
-    this.users = this.userService.getUsers();
-  }
+  ) {}
 
   clearControlValidation(name: string) {
-    console.log(name);
-    console.log(this.userForm);
     this.userForm.controls[name].markAsTouched();
   }
 
   onSelect(usr: User) {
     this.selectedUser = usr;
-    this.userForm.controls["id"].setValue(this.selectedUser.id);
-    this.userForm.controls["firstName"].setValue(this.selectedUser.firstName);
-    this.userForm.controls["lastName"].setValue(this.selectedUser.lastName);
-    this.userForm.controls["email"].setValue(this.selectedUser.email);
-    this.userForm.controls["age"].setValue(this.selectedUser.age);
+    this.userForm.controls['id'].setValue(this.selectedUser.id);
+    this.userForm.controls['firstName'].setValue(this.selectedUser.firstName);
+    this.userForm.controls['lastName'].setValue(this.selectedUser.lastName);
+    this.userForm.controls['email'].setValue(this.selectedUser.email);
+    this.userForm.controls['age'].setValue(this.selectedUser.age);
   }
 
   onSubmit(e: Event, form: FormGroup) {
     this.isFormSubmitted = true;
     e.preventDefault();
-    this.userForm.controls["firstName"].markAsUntouched();
-    this.userForm.controls["lastName"].markAsUntouched();
-    this.userForm.controls["email"].markAsUntouched();
-    this.userForm.controls["age"].markAsUntouched();
+    this.userForm.controls['firstName'].markAsUntouched();
+    this.userForm.controls['lastName'].markAsUntouched();
+    this.userForm.controls['email'].markAsUntouched();
+    this.userForm.controls['age'].markAsUntouched();
 
     if (this.userForm.valid) {
       let user: User = form.value;
-      this.userService.addUser(user);
+      // this.userService.addUser(user);
       this.userForm.reset();
       this.isFormSubmitted = false;
     }
@@ -62,7 +57,11 @@ export class HomeComponent implements OnInit {
       lastName: [this.selectedUser ? this.selectedUser.lastName : null, Validators.required],
       email: [this.selectedUser ? this.selectedUser.email : null, [Validators.required, Validators.pattern(this.REG_EXP)]],
       age: [this.selectedUser ? this.selectedUser.age : null]
-    })
+    });
+    this.userService.getUsers()
+                    .then(
+                      data => this.users = data
+                    )
   }
 
 }
