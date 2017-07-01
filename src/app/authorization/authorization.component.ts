@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegExpCommon } from '../common/regexp.common'
 
 @Component({
-    selector: 'app-autorization',
+    selector: 'app-authorization',
     templateUrl: './authorization.component.html',
     styleUrls: ['./authorization.component.styl']  
 })

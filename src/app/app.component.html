@@ -1,29 +1,34 @@
 <header class="header">
   <nav class="nav-main">
-    <li *ngFor="let item of navItems"
-        class="nav-main__item">
-      <a [routerLink]="item.link"
-         routerLinkActive="nav-main__item-link--active"
-         class="nav-main__item-link">
-         {{item.name}}
-      </a>
-    </li>
+  <img src="../assets/BgBrain.png" alt="">
+    <ul>
+      <li *ngFor="let item of navItems"
+          class="nav-main__item">
+        <a [routerLink]="item.link"
+           routerLinkActive="nav-main__item-link--active"
+           class="nav-main__item-link">
+           {{item.name}}
+        </a>
+      </li>  
+    </ul>
   </nav>
   <nav class="nav-auth">
-    <li class="nav-auth__item">
-      <a [routerLink]="Registration"
-         routerLinkActive="nav-auth__item-link--active"
-         class="nav-auth__item-link">
-         Sign Up
-      </a>
-    </li>
-    <li class="nav-auth__item">
-      <a [class.nav-auth__item-link--active]="isLoginFormShown"
-         (click)="showLoginForm($event)"
-         class="nav-auth__item-link">
-         Login
-      </a>
-    </li>
+    <ul>
+      <li class="nav-auth__item">
+        <a [routerLink]="Registration"
+           routerLinkActive="nav-auth__item-link--active"
+           class="nav-auth__item-link">
+           Sign Up
+        </a>
+      </li>
+      <li class="nav-auth__item">
+        <a [class.nav-auth__item-link--active]="isLoginFormShown"
+           (click)="showLoginForm($event)"
+           class="nav-auth__item-link">
+           Login
+        </a>
+      </li>
+    </ul>
   </nav>
   <div class="login-form">
     <app-authorization></app-authorization> 

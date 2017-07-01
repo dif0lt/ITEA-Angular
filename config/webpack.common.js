@@ -1,4 +1,3 @@
-const fs = require('fs');
 const path = require('path');
 const ProgressPlugin = require('webpack/lib/ProgressPlugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -12,7 +11,6 @@ const { CommonsChunkPlugin } = require('webpack').optimize;
 const { AotPlugin } = require('@ngtools/webpack');
 
 const nodeModules = path.join(process.cwd(), 'node_modules');
-const realNodeModules = fs.realpathSync(nodeModules);
 const genDirNodeModules = path.join(process.cwd(), 'src', '$$_gendir', 'node_modules');
 const entryPoints = ["inline","polyfills","sw-register","styles","vendor","main"];
 const minimizeCss = false;
@@ -54,9 +52,6 @@ const postcssPlugins = function () {
         ].concat(minimizeCss ? [cssnano(minimizeOptions)] : []);
     };
 
-
-
-
 module.exports = {
   "devtool": "source-map",
   "resolve": {
@@ -71,7 +66,6 @@ module.exports = {
   },
   "resolveLoader": {
     "modules": [
-      "./node_modules",
       "./node_modules"
     ]
   },
@@ -197,66 +191,6 @@ module.exports = {
         "include": [
           path.join(process.cwd(), "src\\styles.css")
         ],
-        "test": /\.scss$|\.sass$/,
-        "use": [
-          "style-loader",
-          {
-            "loader": "css-loader",
-            "options": {
-              "sourceMap": false,
-              "importLoaders": 1
-            }
-          },
-          {
-            "loader": "postcss-loader",
-            "options": {
-              "ident": "postcss",
-              "plugins": postcssPlugins
-            }
-          },
-          {
-            "loader": "sass-loader",
-            "options": {
-              "sourceMap": false,
-              "precision": 8,
-              "includePaths": []
-            }
-          }
-        ]
-      },
-      {
-        "include": [
-          path.join(process.cwd(), "src\\styles.css")
-        ],
-        "test": /\.less$/,
-        "use": [
-          "style-loader",
-          {
-            "loader": "css-loader",
-            "options": {
-              "sourceMap": false,
-              "importLoaders": 1
-            }
-          },
-          {
-            "loader": "postcss-loader",
-            "options": {
-              "ident": "postcss",
-              "plugins": postcssPlugins
-            }
-          },
-          {
-            "loader": "less-loader",
-            "options": {
-              "sourceMap": false
-            }
-          }
-        ]
-      },
-      {
-        "include": [
-          path.join(process.cwd(), "src\\styles.css")
-        ],
         "test": /\.styl$/,
         "use": [
           "style-loader",
@@ -342,12 +276,8 @@ module.exports = {
       "name": [
         "vendor"
       ],
-      "minChunks": (module) => {
-                return module.resource
-                    && (module.resource.startsWith(nodeModules)
-                        || module.resource.startsWith(genDirNodeModules)
-                        || module.resource.startsWith(realNodeModules));
-            },
+      "minChunks": (module) => module.resource &&
+                   (module.resource.startsWith(nodeModules) || module.resource.startsWith(genDirNodeModules)),
       "chunks": [
         "main"
       ]

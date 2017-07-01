@@ -37,6 +37,7 @@ export class UserService {
 
   private errorHandler(err: Error) {
     console.log(err);
+    console.log('alarm--Ahtung--caput');
   }
 
   private headers: Headers = new Headers({ 'Content-Type': 'application/json'});
