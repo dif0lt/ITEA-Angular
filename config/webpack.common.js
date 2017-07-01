@@ -54,6 +54,9 @@ const postcssPlugins = function () {
         ].concat(minimizeCss ? [cssnano(minimizeOptions)] : []);
     };
 
+
+
+
 module.exports = {
   "devtool": "source-map",
   "resolve": {
@@ -136,7 +139,7 @@ module.exports = {
             }
           }
         ]
-      },
+      },   
       {
         "exclude": [
           path.join(process.cwd(), "src\\styles.css")

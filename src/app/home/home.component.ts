@@ -1,13 +1,50 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { trigger, state, style, animate, transition } from '@angular/animations'
 import { UserService } from '../services/user.service'
 import { User } from '../models/user'
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  animations: [
+    trigger('userState', [
+      state('inactive, new', style({
+        backgroundColor: '#eee',
+        transform: 'scale(1)'
+      })),
+      state('active', style({
+        backgroundColor: '#fdcd3d',
+        // transform: 'scale(1.07)'
+      })),
+      transition('inactive => active, new => active' , [
+        style({
+          backgroundColor: '#eee',
+          transform: 'scale(1)'
+        }),
+        animate ("200ms ease-in", style({
+          backgroundColor: '#eee',
+          transform: 'scale(1.1)'
+        })),
+        animate ("200ms ease-in", style({
+          backgroundColor: '#fdcd3d',
+          transform: 'scale(1)'
+        }))
+      ]),
+      transition('active => inactive', animate('300ms ease-out')),
+      transition('void => new', [
+        style({
+          backgroundColor: '#eee',
+          transform: 'translateX(-100%)'
+        }),
+        animate ("600ms ease-in", style({
+          backgroundColor: '#eee',
+          transform: 'translateX(0%)'
+        }))
+      ])
+    ])
+  ]
 })
 export class HomeComponent implements OnInit {
   isFormSubmitted: boolean = false;
@@ -15,11 +52,17 @@ export class HomeComponent implements OnInit {
   selectedUser: User;
   userForm: FormGroup; 
   REG_EXP: any = /[a-zA-Z_]+@[a-zA-Z_]+?\.[a-zA-Z]{2,4}/;
+  
+  stateOfUser: string;
 
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService
   ) {}
+  
+// addNewUser() {
+
+// }
 
   clearControlValidation(name: string) {
     this.userForm.controls[name].markAsTouched();
@@ -27,6 +70,7 @@ export class HomeComponent implements OnInit {
 
   onSelect(usr: User) {
     this.selectedUser = usr;
+    this.toggleState();
     this.userForm.controls['id'].setValue(this.selectedUser.id);
     this.userForm.controls['firstName'].setValue(this.selectedUser.firstName);
     this.userForm.controls['lastName'].setValue(this.selectedUser.lastName);
@@ -44,13 +88,20 @@ export class HomeComponent implements OnInit {
 
     if (this.userForm.valid) {
       let user: User = form.value;
+      user.state = 'new';
+      this.users.push(form.value)
       // this.userService.addUser(user);
       this.userForm.reset();
       this.isFormSubmitted = false;
     }
   }
 
+  toggleState() {
+    (this.selectedUser.state === 'new' || this.selectedUser.state === 'inactive') ? this.selectedUser.state = 'active' : this.selectedUser.state = 'inactive'
+  }
+
   ngOnInit(): void {
+
     this.userForm = this.formBuilder.group({
       id: [this.selectedUser ? this.selectedUser.id : null],
       firstName: [this.selectedUser ? this.selectedUser.firstName : null, Validators.required],
@@ -60,7 +111,10 @@ export class HomeComponent implements OnInit {
     });
     this.userService.getUsers()
                     .then(
-                      data => this.users = data
+                      data => {
+                        this.users = data;
+                        this.users.forEach(user => user.state = 'inactive')
+                      }
                     )
   }
 

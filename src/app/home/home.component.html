@@ -1,5 +1,5 @@
 <ul>
-  <li *ngFor="let user of users" (click)="onSelect(user)">
+  <li [@userState]='user.state' *ngFor="let user of users" (click)="onSelect(user)">
     {{user.firstName}} | {{user.lastName}}
   </li>
 </ul>

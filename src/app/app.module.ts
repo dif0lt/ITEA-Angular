@@ -6,6 +6,7 @@ import { RoutingModule } from './modules/routing.module';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import { AuthorizationComponent } from './authorization/authorization.component'
 import { CatalogComponent } from './catalog/catalog.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { HomeComponent } from './home/home.component';
@@ -23,6 +24,7 @@ import { RegistrationComponent } from './registration/registration.component';
 @NgModule({
   declarations: [
     AppComponent,
+    AuthorizationComponent,
     CatalogComponent,
     ContactUsComponent,
     HomeComponent,
