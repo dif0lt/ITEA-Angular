@@ -1,7 +1,8 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
-    "name": "exam-ecommerce"
+    "name": "exam-ecommerce",
+    "ejected": true
   },
   "apps": [
     {
@@ -11,11 +12,6 @@
         "assets",
         "favicon.ico"
       ],
-      "defaults": {
-        "serve": {
-          "port": 1337
-        }
-      },
       "index": "index.html",
       "main": "main.ts",
       "polyfills": "polyfills.ts",
@@ -57,6 +53,7 @@
   },
   "defaults": {
     "styleExt": "css",
-    "component": {}
+    "component": {
+    }
   }
 }
