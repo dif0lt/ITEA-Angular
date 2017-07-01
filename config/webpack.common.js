@@ -137,68 +137,6 @@ module.exports = {
           }
         ]
       },
-      // ========== dell from hear ==========
-      // {
-      //   "exclude": [
-      //     path.join(process.cwd(), "src\\styles.css")
-      //   ],
-      //   "test": /\.scss$|\.sass$/,
-      //   "use": [
-      //     "exports-loader?module.exports.toString()",
-      //     {
-      //       "loader": "css-loader",
-      //       "options": {
-      //         "sourceMap": false,
-      //         "importLoaders": 1
-      //       }
-      //     },
-      //     {
-      //       "loader": "postcss-loader",
-      //       "options": {
-      //         "ident": "postcss",
-      //         "plugins": postcssPlugins
-      //       }
-      //     },
-      //     {
-      //       "loader": "sass-loader",
-      //       "options": {
-      //         "sourceMap": false,
-      //         "precision": 8,
-      //         "includePaths": []
-      //       }
-      //     }
-      //   ]
-      // },
-      // {
-      //   "exclude": [
-      //     path.join(process.cwd(), "src\\styles.css")
-      //   ],
-      //   "test": /\.less$/,
-      //   "use": [
-      //     "exports-loader?module.exports.toString()",
-      //     {
-      //       "loader": "css-loader",
-      //       "options": {
-      //         "sourceMap": false,
-      //         "importLoaders": 1
-      //       }
-      //     },
-      //     {
-      //       "loader": "postcss-loader",
-      //       "options": {
-      //         "ident": "postcss",
-      //         "plugins": postcssPlugins
-      //       }
-      //     },
-      //     {
-      //       "loader": "less-loader",
-      //       "options": {
-      //         "sourceMap": false
-      //       }
-      //     }
-      //   ]
-      // },
-      // ========== dell to hear ==========
       {
         "exclude": [
           path.join(process.cwd(), "src\\styles.css")
