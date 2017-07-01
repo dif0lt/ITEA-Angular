@@ -51,7 +51,7 @@ const postcssPlugins = function () {
             autoprefixer(),
         ].concat(minimizeCss ? [cssnano(minimizeOptions)] : []);
     };
-
+    
 module.exports = {
   "devtool": "source-map",
   "resolve": {
@@ -133,7 +133,7 @@ module.exports = {
             }
           }
         ]
-      },   
+      },
       {
         "exclude": [
           path.join(process.cwd(), "src\\styles.css")
@@ -231,7 +231,7 @@ module.exports = {
         "favicon.ico"
       ],
       "globOptions": {
-        "cwd": "E:\\ITEA-Angular\\Exam\\ITEA_Angular_Exam\\src",
+        "cwd": "C:\\Users\\dif0lt\\Documents\\GitHub\\ITEA-Angular\\src", ///need to change on USB
         "dot": true,
         "ignore": "**/.gitkeep"
       }
@@ -277,7 +277,7 @@ module.exports = {
         "vendor"
       ],
       "minChunks": (module) => module.resource &&
-                   (module.resource.startsWith(nodeModules) || module.resource.startsWith(genDirNodeModules)),
+                (module.resource.startsWith(nodeModules) || module.resource.startsWith(genDirNodeModules)),
       "chunks": [
         "main"
       ]
