@@ -11,6 +11,8 @@ export class UserService {
     private http: Http,
    ) {}
 
+  private headers: Headers = new Headers({ 'Content-Type': 'application/json'});
+
   getUsers(): Promise<User[]> {
     const URL = './assets/users.json';
     return this.http.get(URL)
@@ -39,6 +41,4 @@ export class UserService {
     console.log(err);
     console.log('alarm--Ahtung--caput');
   }
-
-  private headers: Headers = new Headers({ 'Content-Type': 'application/json'});
 }

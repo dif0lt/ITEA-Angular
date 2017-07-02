@@ -35,7 +35,6 @@ import { RegistrationComponent } from './registration/registration.component';
     FactorialPipe,
     JoinPipe,
     RegistrationComponent
-
   ],
   imports: [
     BrowserModule,

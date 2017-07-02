@@ -10,7 +10,7 @@ export class NotFoundComponent {
   constructor() { }
 
   goBack() {
-  	window.history.back();
+    window.history.back();
   }
 
 }

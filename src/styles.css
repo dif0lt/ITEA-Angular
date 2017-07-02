@@ -49,3 +49,25 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
+/* ============================+=== my style =============================== */
+
+* {
+  box-sizing: border-box;
+}
+
+/* ================================= fonts ================================= */
+body {
+    font: normal normal 16px/18px "Roboto", sans-serif;
+    color: #444444;
+}
+
+/* ================================= links ================================= */
+a, a:visited {
+  color: #656565;
+  text-decoration: none;
+}
+/*a:hover {
+  color: #34b5b5;
+  text-decoration: underline;
+}*/

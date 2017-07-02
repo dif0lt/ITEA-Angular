@@ -11,11 +11,10 @@ export class WhileDirective {
   ) {}
 
   @Input() set while(condition: boolean){
-    if(condition) {
+    if (condition) {
       this.viewContainer.createEmbeddedView(this.template);
     } else {
       this.viewContainer.clear();
     }
-    
-  } 
+  }
 }

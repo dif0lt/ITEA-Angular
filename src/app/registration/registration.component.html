@@ -1,17 +1,30 @@
-<p>
-  registration works!
-</p>
+
+<h4 class="title-4">
+  Create a new account
+</h4>
 <div>
-  <form [formGroup]="userForm" (ngSubmit)="onSubmit($event, userForm)" novalidate>
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit($event, registrationForm)" novalidate>
     <div class="form__row">
-      <label for="username">Username:</label>
+      <label for="firstName">First name:</label>
       <div class="form__input">
-        <input id="username"
-          (change)="clearControlValidation('username')"
-          (focus)="clearControlValidation('username')"
-        formControlName="username" type="text">
-        <div class="message message__error" *ngIf="isFormSubmitted && userForm.controls['username'].invalid && userForm.controls['username'].untouched">
-          Username is required
+        <input id="firstName"
+          (change)="clearControlValidation('firstName')"
+          (focus)="clearControlValidation('firstName')"
+        formControlName="firstName" type="text">
+        <div class="message message__error" *ngIf="isFormSubmitted && registrationForm.controls['firstName'].invalid && registrationForm.controls['firstName'].untouched">
+          First name is required
+        </div>
+      </div>
+    </div>
+    <div class="form__row">
+      <label for="lastName">Last name:</label>
+      <div class="form__input">
+        <input id="lastName"
+          (change)="clearControlValidation('lastName')"
+          (focus)="clearControlValidation('lastName')"
+        formControlName="lastName" type="text">
+        <div class="message message__error" *ngIf="isFormSubmitted && registrationForm.controls['lastName'].invalid && registrationForm.controls['lastName'].untouched">
+          Last name is required
         </div>
       </div>
     </div>
@@ -22,11 +35,11 @@
           (change)="clearControlValidation('email')"
           (focus)="clearControlValidation('email')"
         formControlName="email" type="email">
-        <div class="message message__error" *ngIf="isFormSubmitted && userForm.controls['email'].invalid && userForm.controls['email'].untouched">
-        <span *ngIf="userForm.controls['email'].hasError('required')">
+        <div class="message message__error" *ngIf="isFormSubmitted && registrationForm.controls['email'].invalid && registrationForm.controls['email'].untouched">
+        <span *ngIf="registrationForm.controls['email'].hasError('required')">
           Email is required
         </span>
-        <span *ngIf="userForm.controls['email'].hasError('pattern')">
+        <span *ngIf="registrationForm.controls['email'].hasError('pattern')">
           Email is not Valid
         </span>
         </div>
@@ -39,8 +52,13 @@
           (change)="clearControlValidation('password')"
           (focus)="clearControlValidation('password')"
         formControlName="password" type="text">
-        <div class="message message__error" *ngIf="isFormSubmitted && userForm.controls['password'].invalid && userForm.controls['password'].untouched">
-          Password is required
+        <div class="message message__error" *ngIf="isFormSubmitted && registrationForm.controls['password'].invalid && registrationForm.controls['password'].untouched">
+          <span *ngIf="registrationForm.controls['password'].hasError('required')">
+            Password is required
+          </span>
+          <span *ngIf="registrationForm.controls['password'].hasError('pattern')">
+            Password is not Valid
+          </span>
         </div>
       </div>
     </div>
@@ -48,4 +66,7 @@
       <input type="submit" value="submit">
     </div>
   </form>
+</div>
+<div *ngIf="showSuccessMessage">
+    Thank you, {{user?.firstName}}! You successfully registered go to your email to activate account
 </div>

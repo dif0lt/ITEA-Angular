@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { RegExpCommon } from '../common/regexp.common'
 import { UserService } from '../services/user.service'
 import { User } from '../models/user'
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.css']
+  styleUrls: ['./registration.component.styl']
 })
 export class RegistrationComponent implements OnInit {
-  isFormSubmitted: boolean = false;
-  users: User[];
-  userForm: FormGroup;
-  REG_EXP: any = /[a-zA-Z_]+@[a-zA-Z_]+?\.[a-zA-Z]{2,4}/;
+  isFormSubmitted = false;
+  showSuccessMessage = false;
+  registrationForm: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -21,34 +21,36 @@ export class RegistrationComponent implements OnInit {
   ) {}
 
   clearControlValidation(name: string) {
-    this.userForm.controls[name].markAsTouched();
+    this.registrationForm.controls[name].markAsTouched();
   }
 
   onSubmit(e: Event, form: FormGroup) {
     this.isFormSubmitted = true;
     e.preventDefault();
-    this.userForm.controls['username'].markAsUntouched();
-    this.userForm.controls['email'].markAsUntouched();
-    this.userForm.controls['password'].markAsUntouched();
+    this.registrationForm.controls['firstName'].markAsUntouched();
+    this.registrationForm.controls['lastName'].markAsUntouched();
+    this.registrationForm.controls['email'].markAsUntouched();
+    this.registrationForm.controls['password'].markAsUntouched();
 
-    if (this.userForm.valid) {
+    if (this.registrationForm.valid) {
       const user: User = form.value;
       this.userService.addUser(user);
-      // console.log('*****you call addUser with:')
-      // console.log(user)
-      // console.log('*****')
+      console.log('*****you call addUser with:')
+      console.log(user)
+      console.log('*****')
 
-      this.userForm.reset();
+      this.registrationForm.reset();
       this.isFormSubmitted = false;
     }
   }
 
   ngOnInit(): void {
-    this.userForm = this.formBuilder.group({
+    this.registrationForm = this.formBuilder.group({
       id: [null],
-      username: [null, Validators.required],
-      email: [null, [Validators.required, Validators.pattern(this.REG_EXP)]],
-      password: [null]
+      firstName: [null, Validators.required],
+      lastName: [null, Validators.required],
+      email: [null, [Validators.required, Validators.pattern(RegExpCommon.EMAIL)]],
+      password: [null, [Validators.required, Validators.pattern(RegExpCommon.PASS)]]
     });
   }
 

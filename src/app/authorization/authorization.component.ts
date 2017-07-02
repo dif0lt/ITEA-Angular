@@ -6,7 +6,7 @@ import { RegExpCommon } from '../common/regexp.common'
 @Component({
     selector: 'app-authorization',
     templateUrl: './authorization.component.html',
-    styleUrls: ['./authorization.component.styl']  
+    styleUrls: ['./authorization.component.styl']
 })
 
 export class AuthorizationComponent implements OnInit {

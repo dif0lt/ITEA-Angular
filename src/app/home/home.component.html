@@ -1,10 +1,12 @@
-<ul>
-<!--  -->
-  <li [@userState]='user.state' *ngFor="let user of users" (click)="onSelect(user)">
-    {{user.firstName}} | {{user.lastName}}
-  </li>
-</ul>
-<div>
+<div class="tmp-cont">
+  <ul>
+    <li [@userState]='user.state' *ngFor="let user of users" (click)="onSelect(user)">
+      {{user.firstName}} | {{user.lastName}}
+    </li>
+  </ul>  
+</div>
+
+<!-- <div>
   <form [formGroup]="userForm" (ngSubmit)="onSubmit($event, userForm)" novalidate>
     <div class="form__row">
       <label for="firstName">First Name:</label>
@@ -57,4 +59,4 @@
       <input type="submit" value="submit">
     </div>
   </form>
-</div>
+</div> -->

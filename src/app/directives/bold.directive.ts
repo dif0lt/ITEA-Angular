@@ -28,5 +28,4 @@ export class BoldDirective {
   private setFontWeight(val: string) {
     this.renderer.setStyle(this.elRef.nativeElement, 'font-weight', val);
   }
-
 }

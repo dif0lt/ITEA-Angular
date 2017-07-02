@@ -14,7 +14,7 @@
   <nav class="nav-auth">
     <ul>
       <li class="nav-auth__item">
-        <a [routerLink]="Registration"
+        <a routerLink="Registration"
            routerLinkActive="nav-auth__item-link--active"
            class="nav-auth__item-link">
            Sign Up
@@ -29,10 +29,10 @@
       </li>
     </ul>
   </nav>
-  <div class="login-form">
+  <div class="login-form" *ngIf="isLoginFormShown">
     <app-authorization></app-authorization> 
   </div>
 </header>
-
-
-<router-outlet></router-outlet>
+<main class="wrapper">
+  <router-outlet></router-outlet>
+</main>
