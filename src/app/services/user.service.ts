@@ -7,14 +7,16 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class UserService {
 
-  constructor(
-    private http: Http,
-   ) {}
+  DOMAIN = 'http://localhost:3000'
 
   private headers: Headers = new Headers({ 'Content-Type': 'application/json'});
 
+  constructor(
+    private http: Http,
+   ) {}
+ 
   getUsers(): Promise<User[]> {
-    const URL = './assets/users.json';
+    const URL = `${this.DOMAIN}/api/user`;
     return this.http.get(URL)
                .toPromise()
                .then(
@@ -25,8 +27,8 @@ export class UserService {
                );
   }
 
-  addUser(data: User): Promise<User> {
-    const URL = 'api/addUser';
+  registerUser(data: User): Promise<User> {
+    const URL = `${this.DOMAIN}/api/user`;
     return this.http.post(URL, data, this.headers)
                .toPromise()
                .then(

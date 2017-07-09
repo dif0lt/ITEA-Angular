@@ -1,10 +1,10 @@
 import { Pipe, PipeTransform } from '@angular/core'
 
 @Pipe({
-  name: 'join'
+  name: 'filter'
 })
 
-export class JoinPipe implements PipeTransform {
+export class FilterPipe implements PipeTransform {
   transform(arr: Array<any>, start?: any, end?: any): any {
     let res = arr;
     if (start !== undefined) {

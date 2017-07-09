@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 import { RegExpCommon } from '../common/regexp.common'
-import { UserService } from '../services/user.service'
+
 import { User } from '../models/user'
+
+import { UserService } from '../services/user.service'
 
 @Component({
   selector: 'app-registration',
@@ -11,36 +13,26 @@ import { User } from '../models/user'
   styleUrls: ['./registration.component.styl']
 })
 export class RegistrationComponent implements OnInit {
-  isFormSubmitted = false;
-  showSuccessMessage = false;
   registrationForm: FormGroup;
+  showSuccessMessage = false;
+  user: User;
 
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService
   ) {}
 
-  clearControlValidation(name: string) {
-    this.registrationForm.controls[name].markAsTouched();
-  }
-
   onSubmit(e: Event, form: FormGroup) {
-    this.isFormSubmitted = true;
     e.preventDefault();
-    this.registrationForm.controls['firstName'].markAsUntouched();
-    this.registrationForm.controls['lastName'].markAsUntouched();
-    this.registrationForm.controls['email'].markAsUntouched();
-    this.registrationForm.controls['password'].markAsUntouched();
-
-    if (this.registrationForm.valid) {
-      const user: User = form.value;
-      this.userService.addUser(user);
-      console.log('*****you call addUser with:')
-      console.log(user)
-      console.log('*****')
-
-      this.registrationForm.reset();
-      this.isFormSubmitted = false;
+    this.user = form.value;
+    if (form.valid) {
+    this.userService.registerUser(this.user)
+            .then(
+                () => this.showSuccessMessage = true
+            )
+            .catch(
+                e => console.error(e)
+            )
     }
   }
 
@@ -53,5 +45,4 @@ export class RegistrationComponent implements OnInit {
       password: [null, [Validators.required, Validators.pattern(RegExpCommon.PASS)]]
     });
   }
-
 }

@@ -56,6 +56,10 @@ table {
   box-sizing: border-box;
 }
 
+strong {
+  font-weight: bold;
+}
+
 /* ================================= fonts ================================= */
 body {
     font: normal normal 16px/18px "Roboto", sans-serif;
