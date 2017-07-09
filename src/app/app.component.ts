@@ -35,11 +35,17 @@ export class AppComponent {
     return el;
   }
 
+  HideLoginForm(val: boolean) {
+    this.isLoginFormShown = val;
+  }
+  
   showLoginForm(e: Event) {
     e.stopPropagation();
     this.loginElt.nativeElement = e.target;
     this.isLoginFormShown = true;
-    document.addEventListener('click', this.hideLoginFormListener.bind(this));
+    // document.addEventListener('click', function() {
+    // this.isLoginFormShown = false;
+    // }.bind(this));
   }
 
   private hideLoginFormListener(e: Event) {

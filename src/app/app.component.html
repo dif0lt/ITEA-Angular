@@ -30,7 +30,7 @@
     </ul>
   </nav>
   <div *ngIf="isLoginFormShown">
-    <app-authorization></app-authorization> 
+    <app-authorization (onLoginFormHide)="HideLoginForm($event)"></app-authorization> 
   </div>
 </header>
 <main class="wrapper">

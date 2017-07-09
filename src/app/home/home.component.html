@@ -1,62 +1,14 @@
 <div class="tmp-cont">
+<div>Sort by: <select [(ngModel)]="sortKay">
+  <option value="firstName">First Name</option>
+  <option value="lastName">Last Name</option>
+  <option value="testOne">Test one</option>
+</select>
+<input type="checkbox" [(ngModel)]="sortReverse"> Reverse?
+</div>
   <ul>
-    <li [@userState]='user.state' *ngFor="let user of users" (click)="onSelect(user)">
+    <li [@userState]='user.state' *ngFor="let user of users | sort:sortKay:sortReverse" (click)="onSelect(user)">
       {{user.firstName}} | {{user.lastName}}
     </li>
   </ul>  
 </div>
-
-<!-- <div>
-  <form [formGroup]="userForm" (ngSubmit)="onSubmit($event, userForm)" novalidate>
-    <div class="form__row">
-      <label for="firstName">First Name:</label>
-      <div class="form__input">
-        <input id="firstName"
-          (change)="clearControlValidation('firstName')"
-          (focus)="clearControlValidation('firstName')"
-        formControlName="firstName" type="text">
-        <div class="message message__error" *ngIf="isFormSubmitted && userForm.controls['firstName'].invalid && userForm.controls['firstName'].untouched">
-          First Name is required
-        </div>
-      </div>
-    </div>
-    <div class="form__row">
-      <label for="lastName">Last Name:</label>
-      <div class="form__input">
-        <input id="lastName"
-          (change)="clearControlValidation('lastName')"
-          (focus)="clearControlValidation('lastName')"
-        formControlName="lastName" type="text">
-        <div class="message message__error" *ngIf="isFormSubmitted && userForm.controls['lastName'].invalid && userForm.controls['lastName'].untouched">
-          Last Name is required
-        </div>
-      </div>
-    </div>
-    <div class="form__row">
-      <label for="email">Email:</label>
-      <div class="form__input">
-        <input id="email"
-          (change)="clearControlValidation('email')"
-          (focus)="clearControlValidation('email')"
-        formControlName="email" type="email">
-        <div class="message message__error" *ngIf="isFormSubmitted && userForm.controls['email'].invalid && userForm.controls['email'].untouched">
-        <span *ngIf="userForm.controls['email'].hasError('required')">
-          Email is required
-        </span>
-        <span *ngIf="userForm.controls['email'].hasError('pattern')">
-          Email is not Valid
-        </span>
-        </div>
-      </div>
-    </div>
-    <div class="form__row">
-      <label for="age">Age:</label>
-      <div class="form__input">
-        <input id="age" formControlName="age" type="text">
-      </div>
-    </div>
-    <div class="form__row">
-      <input type="submit" value="submit">
-    </div>
-  </form>
-</div> -->

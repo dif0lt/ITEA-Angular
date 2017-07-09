@@ -7,7 +7,6 @@ import {
     MdButtonModule,
     MdCardModule,
     MdInputModule,
-    MdToolbarModule,
 } from "@angular/material";
 
 import { RoutingModule } from './modules/routing.module';
@@ -56,7 +55,6 @@ import "hammerjs";
     MdButtonModule,
     MdCardModule,
     MdInputModule,
-    MdToolbarModule,
     ReactiveFormsModule,
     RoutingModule
   ],
