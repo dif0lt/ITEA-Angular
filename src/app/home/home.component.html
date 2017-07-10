@@ -1,11 +1,12 @@
 <div class="tmp-cont">
-<div>Sort by: <select [(ngModel)]="sortKay">
-  <option value="firstName">First Name</option>
-  <option value="lastName">Last Name</option>
-  <option value="testOne">Test one</option>
-</select>
-<input type="checkbox" [(ngModel)]="sortReverse"> Reverse?
-</div>
+  <div>Sort by:
+    <select [(ngModel)]="sortKay">
+      <option value="firstName">First Name</option>
+      <option value="lastName">Last Name</option>
+      <option value="testOne">Test one</option>
+    </select>
+    <input type="checkbox" [(ngModel)]="sortReverse"> Reverse?
+  </div>
   <ul>
     <li [@userState]='user.state' *ngFor="let user of users | sort:sortKay:sortReverse" (click)="onSelect(user)">
       {{user.firstName}} | {{user.lastName}}

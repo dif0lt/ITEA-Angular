@@ -18,9 +18,9 @@ export class AppComponent {
   eventElt: ElementRef;
   title = 'Angular ITEA';
   navItems: NavItem[] = [
-    { name: 'Home', link: 'Home' },
-    { name: 'Catalog', link: 'Catalog' },
-    { name: 'Contact Us', link: 'Contact-Us' },
+    { name: 'Home', link: 'home' },
+    { name: 'Catalog', link: 'catalog' },
+    { name: 'Contact Us', link: 'contact-Us' },
   ]
 
   constructor(
