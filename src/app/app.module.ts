@@ -29,8 +29,10 @@ import { SortPipe } from './pipes/sort.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
 
 import { UserService } from './services/user.service';
+import { BreadcrumbsService} from './services/breadcrumbs.service'
 
 import "hammerjs";
+import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,7 @@ import "hammerjs";
     JoinPipe,
     SortPipe,
     FilterPipe,
+    BreadcrumbsComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -60,7 +63,10 @@ import "hammerjs";
     ReactiveFormsModule,
     RoutingModule
   ],
-  providers: [UserService],
+  providers: [
+    UserService,
+    BreadcrumbsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { };
