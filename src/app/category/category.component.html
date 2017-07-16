@@ -2,8 +2,11 @@
   category works!
 </p>
 <p>
-  {{category?.name}}
+	{{category?.name}}
 </p>
-<p>
-  {{category?.description}}
-</p>
+  <form [formGroup]="categoryForm" (ngSubmit)="onSubmit($event, categoryForm)" novalidate>
+	<input formControlName="id" type="text">
+	<input formControlName="name" type="text">
+	<input formControlName="description" type="text">
+	<button type="submit">Save</button>
+</form>

@@ -21,17 +21,20 @@
         </a>
       </li>
       <li class="nav-auth__item">
-        <a [class.nav-auth__item-link--active]="isLoginFormShown"
+        <a
+          routerLink="/login"
+          class="nav-auth__item-link">
+<!--         <a [class.nav-auth__item-link--active]="isLoginFormShown"
            (click)="showLoginForm($event)"
-           class="nav-auth__item-link">
-           Login
+           class="nav-auth__item-link"> -->
+          Login
         </a>
       </li>
     </ul>
   </nav>
-  <div *ngIf="isLoginFormShown">
+<!--   <div *ngIf="isLoginFormShown">
     <app-authorization (onLoginFormHide)="HideLoginForm($event)"></app-authorization> 
-  </div>
+  </div> -->
 </header>
 <main class="wrapper">
   <app-breadcrumbs></app-breadcrumbs>

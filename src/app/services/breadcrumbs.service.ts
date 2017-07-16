@@ -3,7 +3,7 @@ export class BreadcrumbsService {
     private routeFriendlyNames = {};
 
     addFriendlyNameForRoute(route: string, name: string): void {
-        this.routeFriendlyNames[route] = name;
+        this.routeFriendlyNames[route] = decodeURI(name);
     }
 
     getFriendlyNameForRoute(route: string): string {

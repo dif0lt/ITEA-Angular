@@ -1,4 +1,4 @@
-<md-card class="login-form">
+<!-- <md-card class="login-form">
   <form [formGroup]="authorizationForm">
     <md-input-container class="full-width">
       <input mdInput formControlName="email" placeholder="Email">
@@ -8,4 +8,9 @@
     </md-input-container>
       <button md-raised-button type="submit">Login</button>
   </form>
-</md-card>
+</md-card> -->
+<div>
+  {{message}}
+  <button md-raised-button (click)='logIn()'>LogIn</button>
+  <button md-raised-button (click)='logOut()'>LogOut</button>
+</div>

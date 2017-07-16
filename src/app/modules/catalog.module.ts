@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common'
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { 
     MdButtonModule,
 } from "@angular/material";
@@ -9,6 +10,7 @@ import { CategoryComponent } from '../category/category.component';
 
 import { CatalogRoutingModule } from './catalog-routing.module';
 import { CategoriesService } from '../services/categories.service';
+import { CanDeactivateGuardService } from '../services/can-deactivate-guard.service';
 
 @NgModule({
   declarations: [
@@ -19,8 +21,13 @@ import { CategoriesService } from '../services/categories.service';
     CatalogRoutingModule,
     CommonModule,
     MdButtonModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [CategoriesService],
+  providers: [
+  CategoriesService,
+  CanDeactivateGuardService
+  ],
   bootstrap: []
 })
 export class CatalogModule { };

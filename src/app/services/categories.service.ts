@@ -31,8 +31,22 @@ export class CategoriesService {
     const URL = `${this.DOMAIN}/api/category/${id}`;
     return this.http.get(URL)
                     .map(response => response.json() as Category)
-                    .catch(this.errorHandler)
+                    .catch(this.errorHandler)  
   }
+
+  updateCategory(id: any, data: Category) {
+    console.log('updateCategoryInit')
+    const URL = `${this.DOMAIN}/api/category/${id}`;
+    return this.http.post(URL, data, this.headers)
+               .toPromise()
+               .then(
+                 response => response.json() as Category
+               )
+               .catch(
+                 err => this.errorHandler(err)
+               )
+  }
+
   private errorHandler(error: Response | any) {
     let errMsg: string;
     if (error instanceof Response) {
