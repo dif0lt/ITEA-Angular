@@ -1,4 +1,8 @@
-import { Component, ElementRef } from '@angular/core';
+import { Component, ElementRef, OnInit, ChangeDetectorRef } from '@angular/core';
+
+import { AuthService } from './services/auth.service';
+
+declare var jQuery: any;
 
 export class NavItem {
   name: string;
@@ -11,8 +15,9 @@ export class NavItem {
   styleUrls: ['./app.component.styl']
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
   isLoginFormShown = false;
+  isLogedIn = false;
   loginElt: ElementRef;
   loginFormElt: ElementRef;
   eventElt: ElementRef;
@@ -25,18 +30,16 @@ export class AppComponent {
   ]
 
   constructor(
-    private eltRef: ElementRef
+    private eltRef: ElementRef,
+    public authService: AuthService,
+    public changeDetectorRef: ChangeDetectorRef
   ) {
     this.loginElt = this.eltRef;
     this.loginFormElt = this.eltRef;
+    authService.isLoggedInChange.subscribe(value => this.isLogedIn = value);
   }
 
-  private findAncestor(el: any, cls: String) {
-    while ((el = el.parentElement) && !el.classList.contains(cls)) {};  // Linter: "while statements must be braces" what does it mean?
-    return el;
-  }
-
-  HideLoginForm(val: boolean) {
+  hideLoginForm(val: boolean) {
     this.isLoginFormShown = val;
   }
   
@@ -44,16 +47,19 @@ export class AppComponent {
     e.stopPropagation();
     this.loginElt.nativeElement = e.target;
     this.isLoginFormShown = true;
-    // document.addEventListener('click', function() {
-    // this.isLoginFormShown = false;
-    // }.bind(this));
   }
 
-  private hideLoginFormListener(e: Event) {
-    e.stopPropagation();
-    if (!this.findAncestor(e.target, 'login-form')) {
-      this.isLoginFormShown = false;
-      document.removeEventListener('click', this.hideLoginFormListener);
+  logOut(e: Event) {
+    this.authService.logOut();
+    this.isLogedIn = false;
+  }
+
+  ngOnInit() {
+    if(jQuery.cookie('user_id')) {
+      let user = JSON.parse(jQuery.cookie('user_id'));
+      console.log(user);
+      this.authService.logIn(user.email, user.password)
+                      .subscribe(user => this.isLogedIn = true);
     }
   }
 }

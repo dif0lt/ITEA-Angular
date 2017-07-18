@@ -6,6 +6,7 @@ import { Category } from '../models/category'
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/toPromise'
 
 @Injectable()
 export class CategoriesService {
@@ -18,20 +19,30 @@ export class CategoriesService {
     private http: Http,
    ) {}
  
-  getCategories(): Observable<Category[]> {
+  getCategories(): Promise<Category[]> {
     console.log('getCategoriesInit')
     const URL = `${this.DOMAIN}/api/category`;
     return this.http.get(URL)
-                    .map(response => response.json() as Category[])
-                    .catch(this.errorHandler)
+                    .toPromise()
+                    .then(
+                      response => response.json() as Category[]
+                    )
+                    .catch(
+                      error => this.promiseErrorHandler(error)
+                    )
   }
 
-  getCategoryById(id: any): Observable<Category> {
+  getCategoryById(id: any): Promise<Category> {
     console.log('getCategoriesByIdInit')
     const URL = `${this.DOMAIN}/api/category/${id}`;
     return this.http.get(URL)
-                    .map(response => response.json() as Category)
-                    .catch(this.errorHandler)  
+                    .toPromise()
+                    .then(
+                      response => response.json() as Category
+                    )
+                    .catch(
+                      error => this.promiseErrorHandler(error)
+                    )
   }
 
   updateCategory(id: any, data: Category) {
@@ -43,20 +54,24 @@ export class CategoriesService {
                  response => response.json() as Category
                )
                .catch(
-                 err => this.errorHandler(err)
+                 error => this.promiseErrorHandler(error)
                )
   }
 
-  private errorHandler(error: Response | any) {
-    let errMsg: string;
-    if (error instanceof Response) {
-      const body = error.json() || '';
-      const err = body.error || JSON.stringify(body);
-      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
-    } else {
-      errMsg = error.message ? error.message : error.toString();
-    }
-    console.error(errMsg);
-    return Observable.throw(errMsg);
+  private promiseErrorHandler(error: Error) {
+    console.error(error)
   }
+
+  // private errorHandler(error: Response | any) {
+  //   let errMsg: string;
+  //   if (error instanceof Response) {
+  //     const body = error.json() || '';
+  //     const err = body.error || JSON.stringify(body);
+  //     errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+  //   } else {
+  //     errMsg = error.message ? error.message : error.toString();
+  //   }
+  //   console.error(errMsg);
+  //   return Observable.throw(errMsg);
+  // }
 }

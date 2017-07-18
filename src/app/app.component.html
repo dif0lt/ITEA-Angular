@@ -11,7 +11,7 @@
       </li>  
     </ul>
   </nav>
-  <nav class="nav-auth">
+  <nav class="nav-auth" *ngIf="!isLogedIn">
     <ul>
       <li class="nav-auth__item">
         <a routerLink="registration"
@@ -21,20 +21,27 @@
         </a>
       </li>
       <li class="nav-auth__item">
-        <a
-          routerLink="/login"
-          class="nav-auth__item-link">
-<!--         <a [class.nav-auth__item-link--active]="isLoginFormShown"
+        <a [class.nav-auth__item-link--active]="isLoginFormShown"
            (click)="showLoginForm($event)"
-           class="nav-auth__item-link"> -->
+           class="nav-auth__item-link">
           Login
         </a>
       </li>
     </ul>
   </nav>
-<!--   <div *ngIf="isLoginFormShown">
-    <app-authorization (onLoginFormHide)="HideLoginForm($event)"></app-authorization> 
-  </div> -->
+  <nav class="nav-auth" *ngIf="isLogedIn">
+    <ul>
+      <li class="nav-auth__item">
+        <a class="nav-auth__item-link">Cart</a>
+      </li>
+      <li class="nav-auth__item">
+        <a class="nav-auth__item-link" (click)="logOut($event)">Logg out</a>
+      </li>
+    </ul>
+  </nav>
+  <div *ngIf="isLoginFormShown">
+    <app-authorization (onLoginFormHide)="hideLoginForm($event)"></app-authorization> 
+  </div>
 </header>
 <main class="wrapper">
   <app-breadcrumbs></app-breadcrumbs>

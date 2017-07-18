@@ -26,9 +26,12 @@ export class CatalogComponent implements OnInit {
   ngOnInit() {
     console.log('catalogInit');
     this.categoriesService.getCategories()
-                    .subscribe(
-                      categories => this.categories = categories,
-                      error => console.error(error)
-                    )               
+                          .then(
+                            categories => this.categories = categories,
+                          )
+                    // .subscribe(
+                    //   categories => this.categories = categories,
+                    //   error => console.error(error)
+                    // )               
   }
 }

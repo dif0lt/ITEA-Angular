@@ -1,21 +1,68 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable'
+import { Http, Response } from '@angular/http';
+import { Subject }    from 'rxjs/Subject';
+
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/delay';
+
+import { LinksCommon } from '../common/links.common';
+import { User } from '../models/user';
+
+declare var jQuery: any;
 
 @Injectable()
 export class AuthService {
 	isLoggedIn: boolean = false;
 	redirectUrl: string;
+  isLoggedInChange: Subject<boolean> = new Subject<boolean>();
 
-	logIn(): Observable<boolean> {
-		return Observable.of(true).delay(1000).do(
-			val => this.isLoggedIn = true
-		)
+	private endpoint =`${LinksCommon.ENDPOINT}login`;
+
+  constructor(
+  	private http: Http
+  ) {}
+
+	logIn(email: string, password: string): Observable<User> {
+		const URL = `${this.endpoint}/${email}/${password}`;
+		return this.http.get(URL)
+                    .map(
+                      response => {
+                        if(response['_body'] !=='') {
+                          console.log(response)
+                          this.ChangeLoginState(true);
+                          let ret = response.json() as User
+                          jQuery.cookie('user_id', JSON.stringify({id:`${ret.id}`,email:`${ret.email}`,password:`${ret.password}`}), {expires: 7, path: '/'});
+                          return ret
+                        } else {
+                          alert('There is no such user or password is incorrect');
+                        }
+                      })
+                    .catch(
+                    	error => this.errorHandler(error)
+                    )
 	}
 
 	logOut(): void {
-		this.isLoggedIn = false;
+		this.ChangeLoginState(false);
+    jQuery.removeCookie('user_id');
 	}
+
+  ChangeLoginState(state: boolean) {
+    this.isLoggedInChange.next(state);
+  }
+
+	private errorHandler(error: Response | any) {
+    let errMsg: string;
+    if (error instanceof Response) {
+      const body = error.json() || '';
+      const err = body.error || JSON.stringify(body);
+      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+    } else {
+      errMsg = error.message ? error.message : error.toString();
+    }
+    console.error(errMsg);
+    return Observable.throw(errMsg);
+  }
 }

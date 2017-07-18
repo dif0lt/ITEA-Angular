@@ -27,12 +27,12 @@ export class RegistrationComponent implements OnInit {
     this.user = form.value;
     if (form.valid) {
     this.userService.registerUser(this.user)
-            .then(
-                () => this.showSuccessMessage = true
-            )
-            .catch(
-                e => console.error(e)
-            )
+                    .then(
+                      () => this.showSuccessMessage = true
+                    )
+                    .catch(
+                      e => console.error(e)
+                    )
     }
   }
 
@@ -42,6 +42,7 @@ export class RegistrationComponent implements OnInit {
       firstName: [null, Validators.required],
       lastName: [null, Validators.required],
       email: [null, [Validators.required, Validators.pattern(RegExpCommon.EMAIL)]],
+      role: ["user"],
       password: [null, [Validators.required, Validators.pattern(RegExpCommon.PASS)]]
     });
   }

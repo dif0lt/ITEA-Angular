@@ -10,38 +10,38 @@ import {BreadcrumbsService} from '../services/breadcrumbs.service';
   styleUrls: ['./breadcrumbs.component.styl']
 })
 export class BreadcrumbsComponent {
-  
-  private _urls: String[];
 
-  constructor(
-    private router: Router,
-    private location: LocationStrategy,
-    private breadcrumbsService: BreadcrumbsService
-  ) {
-      this._urls = new Array();
-      this.router.events.subscribe(() => {
-        this._urls.length = 0;
-        this.generateBreadcrumbTrail(this.location.path());
-      });
-  }
+    private _urls: String[];
 
-  generateBreadcrumbTrail(url: string): void {
-      this._urls.unshift(url);
-      if (url.lastIndexOf('/') > 0) {
-        this.generateBreadcrumbTrail(url.substr(0, url.lastIndexOf('/')));
-        this.breadcrumbsService.addFriendlyNameForRoute(url, url.substr(url.lastIndexOf('/')+1, url.length))
-      }
-  }
+    constructor(
+      private router: Router,
+      private location: LocationStrategy,
+      private breadcrumbsService: BreadcrumbsService
+    ) {
+        this._urls = new Array();
+        this.router.events.subscribe(() => {
+          this._urls.length = 0;
+          this.generateBreadcrumbTrail(this.location.path());
+        });
+    }
 
-  navigateTo(url: string): void {
-      this.router.navigateByUrl(url);
-  }
+    generateBreadcrumbTrail(url: string): void {
+        this._urls.unshift(url);
+        if (url.lastIndexOf('/') > 0) {
+          this.generateBreadcrumbTrail(url.substr(0, url.lastIndexOf('/')));
+          this.breadcrumbsService.addFriendlyNameForRoute(url, url.substr(url.lastIndexOf('/')+1, url.length))
+        }
+    }
 
-  friendlyName(url: string): string {
-      return !url ? '' : this.breadcrumbsService.getFriendlyNameForRoute(url);
-  }
+    navigateTo(url: string): void {
+        this.router.navigateByUrl(url);
+    }
 
-  get urls() {
-    return this._urls;
-  }
+    friendlyName(url: string): string {
+        return !url ? '' : this.breadcrumbsService.getFriendlyNameForRoute(url);
+    }
+
+    get urls() {
+      return this._urls;
+    }
 }

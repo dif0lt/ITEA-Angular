@@ -11,6 +11,7 @@ import { CategoryComponent } from '../category/category.component';
 import { CatalogRoutingModule } from './catalog-routing.module';
 import { CategoriesService } from '../services/categories.service';
 import { CanDeactivateGuardService } from '../services/can-deactivate-guard.service';
+import { CatalogResolverService } from '../services/catalog-resolver.service'
 
 @NgModule({
   declarations: [
@@ -20,13 +21,14 @@ import { CanDeactivateGuardService } from '../services/can-deactivate-guard.serv
   imports: [
     CatalogRoutingModule,
     CommonModule,
-    MdButtonModule,
     FormsModule,
-    ReactiveFormsModule
+    MdButtonModule,
+    ReactiveFormsModule,
   ],
   providers: [
+  CanDeactivateGuardService,
+  CatalogResolverService,
   CategoriesService,
-  CanDeactivateGuardService
   ],
   bootstrap: []
 })

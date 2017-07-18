@@ -41,7 +41,7 @@ export class CategoryComponent implements OnInit {
     console.log('CategoryComponentInit')
     let id: number = this.activatedRoute.snapshot.params['id'];
     this.categoriesService.getCategoryById(id)
-                          .subscribe(
+                          .then(
                             category => this.category = category,
                             error => console.error(error)
                           )
