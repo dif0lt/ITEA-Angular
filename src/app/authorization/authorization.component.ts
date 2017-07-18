@@ -72,6 +72,7 @@ export class AuthorizationComponent implements OnInit {
   }
 
   hideLoginForm() {
+    console.log('hideLoginFormInit')
     this.onLoginFormHide.emit(false);
   }
 

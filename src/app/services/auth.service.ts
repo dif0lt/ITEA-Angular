@@ -14,7 +14,7 @@ declare var jQuery: any;
 
 @Injectable()
 export class AuthService {
-	isLoggedIn: boolean = false;
+	isLoggedIn = false;
 	redirectUrl: string;
   isLoggedInChange: Subject<boolean> = new Subject<boolean>();
 
@@ -30,8 +30,8 @@ export class AuthService {
                     .map(
                       response => {
                         if(response['_body'] !=='') {
-                          console.log(response)
                           this.ChangeLoginState(true);
+                          this.isLoggedIn = true;
                           let ret = response.json() as User
                           jQuery.cookie('user_id', JSON.stringify({id:`${ret.id}`,email:`${ret.email}`,password:`${ret.password}`}), {expires: 7, path: '/'});
                           return ret
@@ -46,6 +46,7 @@ export class AuthService {
 
 	logOut(): void {
 		this.ChangeLoginState(false);
+
     jQuery.removeCookie('user_id');
 	}
 
