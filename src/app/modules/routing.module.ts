@@ -16,7 +16,7 @@ const ROUTES: Routes = [
   { path: 'contact-Us', component: ContactUsComponent },
   { path: 'registration', component: RegistrationComponent },
   { path: 'login', component: AuthorizationComponent },
-  { 
+  {
     path: 'admin',
     loadChildren: 'app/modules/admin.module#AdminModule',
     canLoad: [AuthGuardService],

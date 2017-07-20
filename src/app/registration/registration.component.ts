@@ -42,7 +42,7 @@ export class RegistrationComponent implements OnInit {
       firstName: [null, Validators.required],
       lastName: [null, Validators.required],
       email: [null, [Validators.required, Validators.pattern(RegExpCommon.EMAIL)]],
-      role: ["user"],
+      role: ['user'],
       password: [null, [Validators.required, Validators.pattern(RegExpCommon.PASS)]]
     });
   }

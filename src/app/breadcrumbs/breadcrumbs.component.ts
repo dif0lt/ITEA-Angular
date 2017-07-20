@@ -29,7 +29,7 @@ export class BreadcrumbsComponent {
         this._urls.unshift(url);
         if (url.lastIndexOf('/') > 0) {
           this.generateBreadcrumbTrail(url.substr(0, url.lastIndexOf('/')));
-          this.breadcrumbsService.addFriendlyNameForRoute(url, url.substr(url.lastIndexOf('/')+1, url.length))
+          this.breadcrumbsService.addFriendlyNameForRoute(url, url.substr(url.lastIndexOf('/') + 1, url.length))
         }
     }
 

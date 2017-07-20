@@ -18,7 +18,7 @@ export class CategoriesService {
   constructor(
     private http: Http,
    ) {}
- 
+
   getCategories(): Promise<Category[]> {
     console.log('getCategoriesInit')
     const URL = `${this.DOMAIN}/api/category`;

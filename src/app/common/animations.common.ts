@@ -1,8 +1,8 @@
 import { trigger, state, style, animate, transition } from '@angular/animations'
 
 export namespace Animations {
-  export const FLY_IN_OUT: any = trigger("flyInOut", [
-    state ("inactive", style({
+  export const FLY_IN_OUT: any = trigger('flyInOut', [
+    state ('inactive', style({
       transform: 'translateX(0)'
     })),
     transition('void => *', [
@@ -16,14 +16,14 @@ export namespace Animations {
     ]),
   ]);
 
-  export const USER_STATE: any = trigger("userState", [
-    state ("inactive", style({
-        backgroundColor: "#eee",
-        transform: "scale(1)"
+  export const USER_STATE: any = trigger('userState', [
+    state ('inactive', style({
+        backgroundColor: '#eee',
+        transform: 'scale(1)'
     })),
-    state ("active",   style({
-        backgroundColor: "#fdcd3d",
-        transform: "scale(1)"
+    state ('active',   style({
+        backgroundColor: '#fdcd3d',
+        transform: 'scale(1)'
     })),
       transition ('inactive => active, active => inactive', [
         style ({

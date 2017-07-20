@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { 
+import {
     MdButtonModule,
-} from "@angular/material";
+} from '@angular/material';
 
 import { CatalogComponent } from '../catalog/catalog.component';
 import { CategoryComponent } from '../category/category.component';

@@ -42,7 +42,7 @@ export class AppComponent implements OnInit {
   hideLoginForm(val: boolean) {
     this.isLoginFormShown = val;
   }
-  
+
   showLoginForm(e: Event) {
     e.stopPropagation();
     this.loginElt.nativeElement = e.target;
@@ -55,9 +55,8 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    if(jQuery.cookie('user_id')) {
-      let user = JSON.parse(jQuery.cookie('user_id'));
-      console.log(user);
+    if (jQuery.cookie('user_id')) {
+      const user = JSON.parse(jQuery.cookie('user_id'));
       this.authService.logIn(user.email, user.password)
                       .subscribe(user => this.isLogedIn = true);
     }

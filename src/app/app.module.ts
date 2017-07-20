@@ -3,11 +3,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { 
+import {
     MdButtonModule,
     MdCardModule,
     MdInputModule,
-} from "@angular/material";
+} from '@angular/material';
 
 import { AdminModule } from './modules/admin.module'
 import { CatalogModule } from './modules/catalog.module'
@@ -25,13 +25,14 @@ import { WhileDirective } from './directives/while.directive';
 
 import { FactorialPipe } from './pipes/factorial.pipe';
 import { JoinPipe } from './pipes/join.pipe';
-import { SortPipe } from './pipes/sort.pipe';
+import { GlobalPipeModule } from './modules/global-pipe.module'
+// import { SortPipe } from './pipes/sort.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
 
 import { UserService } from './services/user.service';
 import { BreadcrumbsService} from './services/breadcrumbs.service'
 
-import "hammerjs";
+import 'hammerjs';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 
 @NgModule({
@@ -46,7 +47,7 @@ import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
     WhileDirective,
     FactorialPipe,
     JoinPipe,
-    SortPipe,
+    // SortPipe,
     FilterPipe,
     BreadcrumbsComponent,
   ],
@@ -61,7 +62,8 @@ import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
     MdCardModule,
     MdInputModule,
     ReactiveFormsModule,
-    RoutingModule
+    RoutingModule,
+    GlobalPipeModule
   ],
   providers: [
     UserService,

@@ -1,4 +1,4 @@
-import  { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   Router,
   Resolve,
@@ -17,12 +17,12 @@ export class CatalogResolverService implements Resolve<Category> {
   ) {}
 
   resolve(route: ActivatedRouteSnapshot, site: RouterStateSnapshot): Promise<Category> {
-    let id = route.paramMap.get('id');
+    const id = route.paramMap.get('id');
 
     return this.categoriesService.getCategoryById(id)
                                  .then(
                                    category => {
-                                     if(category) {
+                                     if (category) {
                                        return category;
                                      } else {
                                        this.router.navigate(['/catalog']);

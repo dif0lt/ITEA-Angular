@@ -32,6 +32,6 @@ export class CatalogComponent implements OnInit {
                     // .subscribe(
                     //   categories => this.categories = categories,
                     //   error => console.error(error)
-                    // )               
+                    // )
   }
 }

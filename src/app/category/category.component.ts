@@ -39,12 +39,14 @@ export class CategoryComponent implements OnInit {
 
   ngOnInit() {
     console.log('CategoryComponentInit')
-    let id: number = this.activatedRoute.snapshot.params['id'];
-    this.categoriesService.getCategoryById(id)
-                          .then(
-                            category => this.category = category,
-                            error => console.error(error)
-                          )
+    this.activatedRoute.params.forEach(params => {
+      const id: number = params['id'];
+      this.categoriesService.getCategoryById(id)
+                            .then(
+                              category => this.category = category,
+                              error => console.error(error)
+                            )
+    })
     this.categoryForm = this.formBuilder.group({
       id: [null],
       name: [null, Validators.required],
@@ -54,7 +56,7 @@ export class CategoryComponent implements OnInit {
   }
 
   canDeactivate() {
-    if(!this.category || this.category.name === this.editCategory.name) {
+    if (!this.category || this.category.name === this.editCategory.name) {
       return true;
     }
 

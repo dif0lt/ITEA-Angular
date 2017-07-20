@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { CatalogComponent } from '../catalog/catalog.component';
-import { CategoryComponent } from '../category/category.component'
+import { CategoryComponent } from '../category/category.component';
 
-import { CanDeactivateGuardService } from '../services/can-deactivate-guard.service'
+import { CanDeactivateGuardService } from '../services/can-deactivate-guard.service';
 
-import { CatalogResolverService } from '../services/catalog-resolver.service'
+import { CatalogResolverService } from '../services/catalog-resolver.service';
 
 const CATALOG_ROUTES: Routes = [
   { path: 'catalog',

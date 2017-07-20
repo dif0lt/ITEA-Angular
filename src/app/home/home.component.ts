@@ -15,7 +15,6 @@ export class HomeComponent implements OnInit {
   isFormSubmitted = false;
   users: User[];
   selectedUser: User;
-  REG_EXP: any = /[a-zA-Z_]+@[a-zA-Z_]+?\.[a-zA-Z]{2,4}/;
   // stateOfUser: string;
 
   constructor(
@@ -41,5 +40,4 @@ export class HomeComponent implements OnInit {
                       }
                     )
   }
-
 }

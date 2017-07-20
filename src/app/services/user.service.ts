@@ -9,13 +9,13 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class UserService {
 
-  private endpoint: string = `${LinksCommon.ENDPOINT}user/`;
+  private endpoint = `${LinksCommon.ENDPOINT}user/`;
   private headers: Headers = new Headers({ 'Content-Type': 'application/json'});
 
   constructor(
     private http: Http,
    ) {}
- 
+
   getUsers(): Promise<User[]> {
     return this.http.get(this.endpoint)
                     .toPromise()

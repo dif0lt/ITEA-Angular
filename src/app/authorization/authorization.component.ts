@@ -6,7 +6,7 @@ import { RegExpCommon } from '../common/regexp.common';
 
 import { AuthService } from '../services/auth.service';
 
-import { User } from "../models/user";
+import { User } from '../models/user';
 
 @Component({
     selector: 'app-authorization',
@@ -37,9 +37,9 @@ export class AuthorizationComponent implements OnInit {
     this.elementRef = myElement;
   }
 
-  handleClick(event){
-    var clickedComponent = event.target;
-    var inside = false;
+  handleClick(event) {
+    let clickedComponent = event.target;
+    let inside = false;
     do {
       if (clickedComponent === this.elementRef.nativeElement) {
         inside = true;
@@ -53,8 +53,8 @@ export class AuthorizationComponent implements OnInit {
 
   onSubmit(e: Event, form: FormGroup) {
     e.preventDefault();
-    let email = form.controls['email'].value;
-    let password = form.controls['password'].value;
+    const email = form.controls['email'].value;
+    const password = form.controls['password'].value;
     if (form.valid) {
       this.authService.logIn(email, password)
                       .subscribe(
@@ -72,7 +72,6 @@ export class AuthorizationComponent implements OnInit {
   }
 
   hideLoginForm() {
-    console.log('hideLoginFormInit')
     this.onLoginFormHide.emit(false);
   }
 

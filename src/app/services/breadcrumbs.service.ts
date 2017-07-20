@@ -7,7 +7,7 @@ export class BreadcrumbsService {
     }
 
     getFriendlyNameForRoute(route: string): string {
-        var val = this.routeFriendlyNames[route];
+        let val = this.routeFriendlyNames[route];
         if (!val) {
             val = route.substr(1, route.length);
         }

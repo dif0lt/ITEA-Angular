@@ -1,0 +1,25 @@
+<h4 class="title-4">User detail</h4>
+<form [formGroup]="userForm" (ngSubmit)="onSubmit($event, userForm)" (change)="onChange(userForm)" novalidate>
+  <md-input-container class="thre-in-row">
+    <input mdInput formControlName="id" placeholder="id">
+  </md-input-container>
+  <md-input-container class="thre-in-row">
+    <input mdInput formControlName="firstName" placeholder="First Name">
+  </md-input-container>
+  <md-input-container class="thre-in-row">
+    <input mdInput formControlName="lastName" placeholder="Last Name">
+  </md-input-container>
+  <md-input-container class="thre-in-row">
+    <input mdInput formControlName="email" placeholder="Email">
+  </md-input-container>
+  <md-input-container class="thre-in-row">
+    <input mdInput formControlName="password" placeholder="Password">
+  </md-input-container>
+  <md-input-container class="thre-in-row">
+    <input mdInput formControlName="role" placeholder="Role">
+  </md-input-container>
+  <div class="controls">
+    <button md-raised-button type="submit">Save</button>
+    <button md-raised-button type="button" (click)="onDelete()">Delete</button>
+  </div>
+</form>
